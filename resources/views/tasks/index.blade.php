@@ -1,4 +1,5 @@
 <x-layout>
+    @vite('resources/js/app.js')
     <h1 class="text-center bg-zinc-800 p-2 rounded-full text-xl mb-2">Todo List</h1>
     <div class="self-end border-2 p-1 border-slate-50 text-sm rounded-lg">
         <a href="{{ route('tasks.create') }}">Add Task</a>
@@ -47,9 +48,15 @@
                                     <input type="checkbox" name="completed" onChange="this.form.submit()" {{ $task->completed ? 'checked' : '' }}>
                                 </form>
                             </td>
+                            {{-- <td class="px-6 py-4 whitespace-nowrap">
+                                <a href="{{ route('tasks.edit', $task) }}">Edit</a>\
+                            </td> --}}
                             <td class="px-6 py-4 whitespace-nowrap">
-                                {{-- <a href="{{ route('tasks.edit', $task) }}">Edit</a> --}}
-                                {{-- <a href="{{ route('tasks.show', $task) }}">View</a> --}}
+                                <form data-dir="delete-task" action="{{ route('tasks.destroy', $task) }}" method="POST" onsubmit="return confirmDelete(event)">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button type="submit"><span class="material-symbols-outlined">delete</span></button>
+                                </form>
                             </td>
                         </tr>
                     @endforeach
