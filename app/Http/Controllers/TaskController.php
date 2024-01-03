@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Task;
 use App\Enums\TaskPriority;
+use App\Enums\TaskStatus;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
 
@@ -14,7 +15,7 @@ class TaskController extends Controller
      */
     public function index()
     {
-        $tasks = Task::orderBy('priority', 'asc')->get(); // You can modify the ordering as needed
+        $tasks = Task::all();
         return view('tasks.index', compact('tasks'));
     }
 
@@ -34,15 +35,26 @@ class TaskController extends Controller
         $validatedData = $request->validate([
             'name' => 'required|max:255',
             'priority' => ['required', Rule::in(TaskPriority::cases())],
+            'status' => ['required', Rule::in(TaskStatus::cases())],
             // other fields as necessary
         ]);
 
         $task = new Task();
         $task->name = $validatedData['name'];
-        $task->priority = TaskPriority::from($validatedData['priority']); // Use the enum to set the priority
+        $task->priority = TaskPriority::from($validatedData['priority']);
+        $task->status = TaskStatus::from($validatedData['status']);
+        $task->completed = $request->status === 'complete' ? 1 : 0;
         $task->save();
 
         return redirect()->route('tasks.index');
+    }
+
+    public function toggleCompleted(Task $task)
+    {
+        $task->completed = !$task->completed;
+        $task->save();
+
+        return back();
     }
 
     /**

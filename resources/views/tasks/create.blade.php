@@ -19,11 +19,24 @@
                     <label for="priority">Priority:</label>
                 </th>
                 <td class="p-1">
-                    <select id="priority" name="priority" class="w-full h-full block text-center rounded-lg bg-gray-300 text-slate-500" required>
-                        <option value="">Select Priority</option>
+                    <select id="priority" name="priority" class="w-full h-full block text-center rounded-lg bg-gray-300 text-slate-500">
+                        <option value="normal">Select Priority</option>
                         <option value="low">Low</option>
                         <option value="normal">Normal</option>
                         <option value="high">High</option>
+                    </select>
+                </td>
+            </tr>
+
+            <tr>
+                <th class="p-1">
+                    <label for="status">Status:</label>
+                </th>
+                <td class="p-1">
+                    <select id="status" name="status" class="w-full h-full block text-center rounded-lg bg-gray-300 text-slate-500">
+                        <option value="pending">Select Status</option>
+                        <option value="pending">Pending</option>
+                        <option value="complete">Complete</option>
                     </select>
                 </td>
             </tr>

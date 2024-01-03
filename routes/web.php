@@ -16,5 +16,6 @@ use App\Http\Controllers\TaskController;
 */
 
 Route::get('/', [TaskController::class, 'index'])->name('tasks.index');
-Route::get('/tasks/create', 'App\Http\Controllers\TaskController@create')->name('tasks.create');
-Route::post('/tasks', 'App\Http\Controllers\TaskController@store')->name('tasks.store');
+Route::get('/tasks/create', [TaskController::class, 'create'])->name('tasks.create');
+Route::post('/tasks', [TaskController::class, 'store'])->name('tasks.store');
+Route::patch('/tasks/toggle/{task}', [TaskController::class, 'toggleCompleted'])->name('tasks.toggle');
