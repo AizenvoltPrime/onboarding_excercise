@@ -1,26 +1,33 @@
 <x-layout>
-    <h1>Create New Task</h1>
+    <h1 class="text-center bg-zinc-800 p-2 rounded-full text-xl mb-3">Create New Task</h1>
 
-    <form method="POST" action="{{ route('tasks.store') }}">
+    <form method="POST" action="{{ route('tasks.store') }}" class="flex flex-col justify-center">
         @csrf
 
-        <div>
-            <label for="name">Task Name:</label>
-            <input type="text" id="name" name="name" required>
-        </div>
-        <!-- Priority input field -->
-        <div>
-            <label for="priority">Priority:</label>
-            <select id="priority" name="priority" required>
-                <option value="">Select Priority</option>
-                <option value="low">Low</option>
-                <option value="normal">Normal</option>
-                <option value="high">High</option>
-            </select>
-        </div>
+        <table class="bg-gray-600 text-slate-200 rounded-lg">
+            <tr>
+                <th class="p-1">
+                    <label for="name">Task Name:</label>
+                </th>
+                <td class="p-1">
+                    <input type="text" id="name" name="name" required class="rounded-lg bg-gray-300 text-slate-500 text-center">
+                </td>
+            </tr>
 
-        <div>
-            <button type="submit">Add Task</button>
-        </div>
+            <tr>
+                <th class="p-1">
+                    <label for="priority">Priority:</label>
+                </th>
+                <td class="p-1">
+                    <select id="priority" name="priority" class="w-full h-full block text-center rounded-lg bg-gray-300 text-slate-500" required>
+                        <option value="">Select Priority</option>
+                        <option value="low">Low</option>
+                        <option value="normal">Normal</option>
+                        <option value="high">High</option>
+                    </select>
+                </td>
+            </tr>
+        </table>
+        <button type="submit" class="bg-zinc-800 p-2 rounded-full text-xl self-center mt-2">Add Task</button>
     </form>
 </x-layout>

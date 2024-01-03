@@ -1,5 +1,5 @@
 <x-layout>
-    <h1 class="text-center bg-zinc-800 p-1.5 rounded-full text-xl">Todo List</h1>
+    <h1 class="text-center bg-zinc-800 p-2 rounded-full text-xl mb-2">Todo List</h1>
     <div class="self-end border-2 p-1 border-slate-50 text-sm rounded-lg">
         <a href="{{ route('tasks.create') }}">Add Task</a>
     </div>
@@ -23,7 +23,7 @@
                             <td class="px-6 py-4 whitespace-nowrap">{{ $task->completed ? 'Yes' : 'No' }}</td>
                             <td class="px-6 py-4 whitespace-nowrap">
                                 {{-- <a href="{{ route('tasks.edit', $task) }}">Edit</a> --}}
-                                        {{-- <a href="{{ route('tasks.show', $task) }}">View</a> --}}
+                                {{-- <a href="{{ route('tasks.show', $task) }}">View</a> --}}
                             </td>
                         </tr>
                     @endforeach
