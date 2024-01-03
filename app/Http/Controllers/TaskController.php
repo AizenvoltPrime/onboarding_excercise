@@ -52,6 +52,7 @@ class TaskController extends Controller
     public function toggleCompleted(Task $task)
     {
         $task->completed = !$task->completed;
+        $task->status = $task->completed ? TaskStatus::Complete : TaskStatus::Pending;
         $task->save();
 
         return back();

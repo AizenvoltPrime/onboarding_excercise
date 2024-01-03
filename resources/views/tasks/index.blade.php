@@ -18,7 +18,11 @@
                     @foreach ($tasks as $task)
                         <tr>
                             <td class="px-6 py-4 whitespace-nowrap">{{ $task->id }}</td>
-                            <td class="px-6 py-4 whitespace-nowrap">{{ $task->name }}</td>
+                            @if ($task->status->value == 'complete')
+                                <td class="px-6 py-4 whitespace-nowrap line-through text-slate-400">{{ $task->name }}</td>
+                            @else
+                                <td class="px-6 py-4 whitespace-nowrap">{{ $task->name }}</td>
+                            @endif
                             @if ($task->status->value == 'complete')
                                 <td class="px-6 py-4 whitespace-nowrap">
                                     <div class="text-green-500 border-2 p-1 border-green-500 text-center rounded-lg">{{ ucfirst($task->status->value) }}</div>
