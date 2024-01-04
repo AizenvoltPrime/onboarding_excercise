@@ -21,9 +21,9 @@
                         <tr>
                             <td class="px-6 py-4 whitespace-nowrap">{{ $task->id }}</td>
                             @if ($task->status->value == 'complete')
-                                <td class="px-6 py-4 whitespace-nowrap line-through text-slate-400">{{ $task->name }}</td>
+                                <td class="px-6 py-4 whitespace-nowrap line-through text-slate-400 text-left">{{ $task->name }}</td>
                             @else
-                                <td class="px-6 py-4 whitespace-nowrap">{{ $task->name }}</td>
+                                <td class="px-6 py-4 whitespace-nowrap text-left">{{ $task->name }}</td>
                             @endif
                             @if ($task->status->value == 'complete')
                                 <td class="px-6 py-4 whitespace-nowrap">
