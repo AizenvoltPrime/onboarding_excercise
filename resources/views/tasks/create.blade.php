@@ -41,6 +41,6 @@
                 </td>
             </tr>
         </table>
-        <button type="submit" class="bg-zinc-800 p-2 rounded-full text-xl self-center mt-2">Add Task</button>
+        <button type="submit" class="bg-zinc-800 p-2 rounded-lg text-1 self-center mt-2 border-2 border-slate-500">Add Task</button>
     </form>
 </x-layout>

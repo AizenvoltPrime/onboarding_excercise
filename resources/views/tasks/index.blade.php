@@ -12,7 +12,8 @@
                     <th class="px-6 py-3 text-xs font-medium uppercase tracking-wider">Task Name</th>
                     <th class="px-6 py-3 text-xs font-medium uppercase tracking-wider">Status</th>
                     <th class="px-6 py-3 text-xs font-medium uppercase tracking-wider">Completed</th>
-                    <th class="px-6 py-3 text-xs font-medium uppercase tracking-wider">Actions</th>
+                    <th class="px-6 py-3 text-xs font-medium uppercase tracking-wider">Edit</th>
+                    <th class="px-6 py-3 text-xs font-medium uppercase tracking-wider">Remove</th>
                 </tr>
             </thead>
                 <tbody class="bg-gray-300 divide-y divide-gray-200 text-slate-500">
@@ -48,9 +49,9 @@
                                     <input type="checkbox" name="completed" onChange="this.form.submit()" {{ $task->completed ? 'checked' : '' }}>
                                 </form>
                             </td>
-                            {{-- <td class="px-6 py-4 whitespace-nowrap">
-                                <a href="{{ route('tasks.edit', $task) }}">Edit</a>\
-                            </td> --}}
+                            <td class="px-6 py-4 whitespace-nowrap">
+                                <a href="{{ route('tasks.edit', $task) }}"><span class="material-symbols-outlined">edit</span></a>
+                            </td>
                             <td class="px-6 py-4 whitespace-nowrap">
                                 <form data-dir="delete-task" action="{{ route('tasks.destroy', $task) }}" method="POST" onsubmit="return confirmDelete(event)">
                                     @csrf

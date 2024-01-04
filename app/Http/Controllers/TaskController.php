@@ -36,7 +36,6 @@ class TaskController extends Controller
             'name' => 'required|max:255',
             'priority' => ['required', Rule::in(TaskPriority::cases())],
             'status' => ['required', Rule::in(TaskStatus::cases())],
-            // other fields as necessary
         ]);
 
         $task = new Task();
@@ -78,14 +77,32 @@ class TaskController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $task = Task::findOrFail($id);
+        return view('tasks.edit', compact('task'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, Task $task)
     {
-        //
+        // Validate the request data
+        $validatedData = $request->validate([
+            'name' => 'required|max:255',
+            'priority' => ['required', Rule::in(TaskPriority::cases())],
+            'status' => ['required', Rule::in(TaskStatus::cases())],
+        ]);
+
+        // Update the task with validated data
+        $task->name = $validatedData['name'];
+        $task->priority = TaskPriority::from($validatedData['priority']);
+        $task->status = TaskStatus::from($validatedData['status']);
+        $task->completed = $request->status === 'complete' ? 1 : 0;
+
+        // Save the task
+        $task->save();
+
+        // Redirect to the tasks index page with a success message
+        return redirect()->route('tasks.index')->with('success', 'Task updated successfully.');
     }
 }
