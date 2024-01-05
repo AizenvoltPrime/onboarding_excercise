@@ -1,15 +1,16 @@
 <x-layout>
-    <div class="container">
-        <h1>Dashboard</h1>
+    <div class="flex flex-col justify-center items-center text-2xl min-h-screen">
         @guest
             <p>Welcome to the dashboard. Please log in or register.</p>
-            <a href="{{ route('login') }}" class="button">Login</a>
-            <a href="{{ route('register') }}" class="button">Register</a>
+            <div class="flex items-center gap-2 mt-2">
+                <button class="bg-slate-800 rounded-lg p-2 border-2 border-slate-700"><a href="{{ route('login') }}" class="button">Login</a></button>
+                <button class="bg-slate-800 rounded-lg p-2 border-2 border-slate-700"><a href="{{ route('register') }}" class="button">Register</a></button>
+            </div>
         @else
             <p>Welcome, {{ auth()->user()->name }}!</p>
             <form method="POST" action="{{ route('logout') }}">
                 @csrf
-                <button type="submit">Logout</button>
+                <button class="bg-slate-800 rounded-lg p-2 border-2 border-slate-700 mt-2" type="submit">Logout</button>
             </form>
         @endguest
     </div>
