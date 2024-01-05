@@ -15,7 +15,15 @@ class TaskController extends Controller
      */
     public function index()
     {
-        $tasks = Task::all();
+        // Check if the authenticated user is an admin
+        if (auth()->user()->role === 'admin') {
+            // If the user is an admin, retrieve all tasks
+            $tasks = Task::all();
+        } else {
+            // If the user is not an admin, retrieve only their tasks
+            $tasks = Task::where('user_id', auth()->id())->get();
+        }
+
         return view('tasks.index', compact('tasks'));
     }
 
@@ -40,6 +48,7 @@ class TaskController extends Controller
 
         $task = new Task();
         $task->name = $validatedData['name'];
+        $task->user_id = auth()->id();
         $task->priority = TaskPriority::from($validatedData['priority']);
         $task->status = TaskStatus::from($validatedData['status']);
         $task->completed = $request->status === 'complete' ? 1 : 0;
