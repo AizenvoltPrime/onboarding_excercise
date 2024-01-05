@@ -69,7 +69,9 @@
                     </tbody>
             </table>
         </div>
-    <div class="mt-2 mb-2">
-        {{$tasks->links()}}
-    </div>
+        @if ($tasks->total() > 10)
+            <div class="mt-2 mb-2">
+                {{ $tasks->links() }}
+            </div>
+        @endif
 </x-layout>

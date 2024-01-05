@@ -8,9 +8,10 @@
             </div>
         @else
             <p>Welcome, {{ auth()->user()->name }}!</p>
-            <form method="POST" action="{{ route('logout') }}">
+            <form method="POST" action="{{ route('logout') }}" class="mt-2">
                 @csrf
-                <button class="bg-slate-800 rounded-lg p-2 border-2 border-slate-700 mt-2" type="submit">Logout</button>
+                <button class="bg-slate-800 rounded-lg p-2 border-2 border-slate-700"><a href="{{ route('tasks.index') }}" class="button">Tasks</a></button>
+                <button class="bg-slate-800 rounded-lg p-2 border-2 border-slate-700" type="submit">Logout</button>
             </form>
         @endguest
     </div>

@@ -15,12 +15,19 @@ class TaskController extends Controller
      */
     public function index()
     {
-        // Check if the authenticated user is an admin
-        if (auth()->user()->role === 'admin') {
-            // If the user is an admin, retrieve all tasks
-            $tasks = Task::paginate(10);
-        } else {
-            // If the user is not an admin, retrieve only their tasks
+        // Define the number of items per page
+        $perPage = 10;
+
+        // Check the total number of tasks
+        $totalTasks = Task::count();
+
+        if ($totalTasks > $perPage && auth()->user()->role === 'admin') {
+            $tasks = Task::paginate($perPage);
+        } else if ($totalTasks <= $perPage && auth()->user()->role === 'admin') {
+            $tasks = Task::all();
+        } else if ($totalTasks > $perPage && auth()->user()->role !== 'admin') {
+            $tasks = Task::where('user_id', auth()->id())->paginate(10);
+        } else if ($totalTasks <= $perPage && auth()->user()->role !== 'admin') {
             $tasks = Task::where('user_id', auth()->id())->get();
         }
 
