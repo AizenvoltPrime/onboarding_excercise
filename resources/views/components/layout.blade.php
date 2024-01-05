@@ -7,7 +7,7 @@
     <title>Document</title>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
 </head>
-<body class="dark:bg-slate-800 text-slate-300">
+<body class="dark:bg-slate-900 text-slate-200">
     <script>
         function confirmDelete(event) {
             event.preventDefault();
@@ -19,7 +19,7 @@
         }
     </script>
     <div class="flex justify-center">
-        <div class="flex flex-col justify-center items-center mt-40 max-w-4xl gap-1">
+        <div class="flex flex-col justify-center items-center max-w-4xl gap-1">
             {{$slot}}
         </div>
     </div>
