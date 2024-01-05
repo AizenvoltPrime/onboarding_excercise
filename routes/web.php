@@ -33,3 +33,7 @@ Route::post('logout', [LoginController::class, 'logout'])->name('logout');
 Route::get('/', function () {
     return view('dashboard');
 })->name('dashboard');
+
+Route::middleware(['auth'])->group(function () {
+    Route::resource('tasks', TaskController::class);
+});

@@ -18,7 +18,7 @@ class TaskController extends Controller
         // Check if the authenticated user is an admin
         if (auth()->user()->role === 'admin') {
             // If the user is an admin, retrieve all tasks
-            $tasks = Task::all();
+            $tasks = Task::paginate(10);
         } else {
             // If the user is not an admin, retrieve only their tasks
             $tasks = Task::where('user_id', auth()->id())->get();

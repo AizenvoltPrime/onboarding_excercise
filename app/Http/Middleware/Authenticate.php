@@ -12,6 +12,10 @@ class Authenticate extends Middleware
      */
     protected function redirectTo(Request $request): ?string
     {
+        if (!$request->expectsJson()) {
+            // Change 'login' to the route name of your dashboard
+            return route('dashboard');
+        }
         return $request->expectsJson() ? null : route('login');
     }
 }

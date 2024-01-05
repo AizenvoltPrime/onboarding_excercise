@@ -69,5 +69,7 @@
                     </tbody>
             </table>
         </div>
+    <div class="mt-2 mb-2">
+        {{$tasks->links()}}
     </div>
 </x-layout>
