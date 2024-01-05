@@ -14,7 +14,9 @@
                         <th class="px-6 py-3 text-xs font-medium uppercase tracking-wider">Status</th>
                         <th class="px-6 py-3 text-xs font-medium uppercase tracking-wider">Completed</th>
                         <th class="px-6 py-3 text-xs font-medium uppercase tracking-wider">Edit</th>
-                        <th class="px-6 py-3 text-xs font-medium uppercase tracking-wider">Remove</th>
+                        @if(auth()->check() && auth()->user()->role == 'admin')
+                            <th class="px-6 py-3 text-xs font-medium uppercase tracking-wider">Remove</th>
+                        @endif
                     </tr>
                 </thead>
                     <tbody class="bg-gray-300 divide-y divide-gray-200 text-slate-500">
@@ -53,13 +55,15 @@
                                 <td class="px-6 py-4 whitespace-nowrap">
                                     <a href="{{ route('tasks.edit', $task) }}"><span class="material-symbols-outlined">edit</span></a>
                                 </td>
-                                <td class="px-6 py-4 whitespace-nowrap">
-                                    <form data-dir="delete-task" action="{{ route('tasks.destroy', $task) }}" method="POST" onsubmit="return confirmDelete(event)">
-                                        @csrf
-                                        @method('DELETE')
-                                        <button type="submit"><span class="material-symbols-outlined">delete</span></button>
-                                    </form>
-                                </td>
+                                @if(auth()->check() && auth()->user()->role == 'admin')
+                                    <td class="px-6 py-4 whitespace-nowrap">
+                                            <form data-dir="delete-task" action="{{ route('tasks.destroy', $task) }}" method="POST" onsubmit="return confirmDelete(event)">
+                                                @csrf
+                                                @method('DELETE')
+                                                <button type="submit"><span class="material-symbols-outlined">delete</span></button>
+                                            </form>
+                                        </td>
+                                @endif
                             </tr>
                         @endforeach
                     </tbody>

@@ -59,6 +59,11 @@ class TaskController extends Controller
 
     public function destroy(Task $task)
     {
+        // Check if the user is not an admin or not logged in, abort the action
+        if (!auth()->check() || auth()->user()->role != 'admin') {
+            abort(403);
+        }
+
         $task->delete();
 
         return redirect()->route('tasks.index')->with('success', 'Task deleted successfully.');
