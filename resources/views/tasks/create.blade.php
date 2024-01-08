@@ -5,6 +5,9 @@
                 <a href="{{ route('dashboard') }}" class="hover:text-gray-300">Dashboard</a>
             </div>
             <div>
+                <a href="{{ route('tasks.index') }}" class="hover:text-gray-300">Tasks</a>
+            </div>
+            <div>
                 @auth
                     <a href="#" onclick="event.preventDefault(); document.getElementById('logout-form').submit();" class="hover:text-gray-300">Logout</a>
                     <form id="logout-form" action="{{ route('logout') }}" method="POST" class="hidden">
