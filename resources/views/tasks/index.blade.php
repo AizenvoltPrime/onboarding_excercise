@@ -158,7 +158,11 @@
                                                     <input type="hidden" name="direction" value="{{ $filters['direction'] }}">
                                                 @endif
                                                 <!-- Include the current page -->
-                                                <input type="hidden" name="page" value="{{ $tasks->currentPage() }}">
+                                                @if($tasks->count() == 1 && $tasks->currentPage() > 1)
+                                                    <input type="hidden" name="page" value="{{ $tasks->currentPage() - 1 }}">
+                                                @else
+                                                    <input type="hidden" name="page" value="{{ $tasks->currentPage() }}">
+                                                @endif
                                                 <button type="submit"><span class="material-symbols-outlined">delete</span></button>
                                             </form>
                                         </td>
