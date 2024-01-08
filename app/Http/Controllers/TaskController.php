@@ -43,7 +43,14 @@ class TaskController extends Controller
             $query->where('name', 'like', '%' . $request->title . '%');
         }
 
-        $query->orderBy($sortField, $sortDirection);
+        if ($sortField === 'status') {
+            $query->orderByRaw("FIELD(status, 'pending', 'complete') $sortDirection");
+            $query->orderByRaw("FIELD(priority, 'low', 'normal', 'high') $sortDirection");
+        } else if ($sortField === 'completed') {
+            $query->orderByRaw("FIELD(completed, 0, 1) $sortDirection");
+        } else {
+            $query->orderBy($sortField, $sortDirection);
+        }
 
         if ($totalTasks > $perPage && auth()->user()->role === 'admin') {
             $tasks = $query->paginate($perPage);

@@ -33,8 +33,8 @@
                     <tr>
                         <th class="px-6 py-3 text-xs font-medium uppercase tracking-wider"><a href="{{ route('tasks.index', array_merge($filters, ['sort' => 'id', 'direction' => $sortDirection == 'asc' ? 'desc' : 'asc'])) }}">ID</a></th>
                         <th class="px-6 py-3 text-xs font-medium uppercase tracking-wider"><a href="{{ route('tasks.index', array_merge($filters, ['sort' => 'name', 'direction' => $sortDirection == 'asc' ? 'desc' : 'asc'])) }}">Task Name</a></th>
-                        <th class="px-6 py-3 text-xs font-medium uppercase tracking-wider">Status</th>
-                        <th class="px-6 py-3 text-xs font-medium uppercase tracking-wider">Completed</th>
+                        <th class="px-6 py-3 text-xs font-medium uppercase tracking-wider"><a href="{{ route('tasks.index', array_merge($filters, ['sort' => 'status', 'direction' => $sortField === 'status' && $sortDirection === 'asc' ? 'desc' : 'asc'])) }}">Status</a></th>
+                        <th class="px-6 py-3 text-xs font-medium uppercase tracking-wider"><a href="{{ route('tasks.index', array_merge($filters, ['sort' => 'status', 'direction' => $sortField === 'status' && $sortDirection === 'asc' ? 'desc' : 'asc'])) }}">Completed</a></th>
                         <th class="px-6 py-3 text-xs font-medium uppercase tracking-wider">Edit</th>
                         @if(auth()->check() && auth()->user()->role == 'admin')
                             <th class="px-6 py-3 text-xs font-medium uppercase tracking-wider">Remove</th>
