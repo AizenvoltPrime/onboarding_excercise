@@ -46,10 +46,54 @@
             <table class="table-spacing min-w-full divide-y divide-gray-600 rounded-lg overflow-hidden text-center">
                 <thead class="bg-gray-600 text-slate-200">
                     <tr>
-                        <th class="px-6 py-3 text-xs font-medium uppercase tracking-wider"><a href="{{ route('tasks.index', array_merge($filters, ['sort' => 'id', 'direction' => $sortDirection == 'asc' ? 'desc' : 'asc'])) }}">ID</a></th>
-                        <th class="px-6 py-3 text-xs font-medium uppercase tracking-wider"><a href="{{ route('tasks.index', array_merge($filters, ['sort' => 'name', 'direction' => $sortDirection == 'asc' ? 'desc' : 'asc'])) }}">Task Name</a></th>
-                        <th class="px-6 py-3 text-xs font-medium uppercase tracking-wider"><a href="{{ route('tasks.index', array_merge($filters, ['sort' => 'status', 'direction' => $sortField === 'status' && $sortDirection === 'asc' ? 'desc' : 'asc'])) }}">Status</a></th>
-                        <th class="px-6 py-3 text-xs font-medium uppercase tracking-wider"><a href="{{ route('tasks.index', array_merge($filters, ['sort' => 'status', 'direction' => $sortField === 'status' && $sortDirection === 'asc' ? 'desc' : 'asc'])) }}">Completed</a></th>
+                        <th class="px-6 py-3 text-xs font-medium uppercase tracking-wider">
+                            <a href="{{ route('tasks.index', array_merge($filters, ['sort' => 'id', 'direction' => $sortDirection == 'asc' ? 'desc' : 'asc'])) }}">
+                                ID
+                                @if($sortField == 'id')
+                                    @if($sortDirection == 'asc')
+                                        &#9650; <!-- Upward arrow for ascending sort -->
+                                    @else
+                                        &#9660; <!-- Downward arrow for descending sort -->
+                                    @endif
+                                @endif
+                            </a>
+                        </th>
+                        <th class="px-6 py-3 text-xs font-medium uppercase tracking-wider">
+                            <a href="{{ route('tasks.index', array_merge($filters, ['sort' => 'name', 'direction' => $sortDirection == 'asc' ? 'desc' : 'asc'])) }}">
+                                Task Name
+                                @if($sortField == 'name')
+                                    @if($sortDirection == 'asc')
+                                        &#9650; <!-- Upward arrow for ascending sort -->
+                                    @else
+                                        &#9660; <!-- Downward arrow for descending sort -->
+                                    @endif
+                                @endif
+                            </a>
+                        </th>
+                        <th class="px-6 py-3 text-xs font-medium uppercase tracking-wider">
+                            <a href="{{ route('tasks.index', array_merge($filters, ['sort' => 'status', 'direction' => $sortField === 'status' && $sortDirection === 'asc' ? 'desc' : 'asc'])) }}">
+                                Status
+                                @if($sortField == 'status')
+                                    @if($sortDirection == 'asc')
+                                        &#9650; <!-- Upward arrow for ascending sort -->
+                                    @else
+                                        &#9660; <!-- Downward arrow for descending sort -->
+                                    @endif
+                                @endif
+                            </a>
+                        </th>
+                        <th class="px-6 py-3 text-xs font-medium uppercase tracking-wider">
+                            <a href="{{ route('tasks.index', array_merge($filters, ['sort' => 'completed', 'direction' => $sortField === 'completed' && $sortDirection === 'asc' ? 'desc' : 'asc'])) }}">
+                                Completed
+                                @if($sortField == 'completed')
+                                    @if($sortDirection == 'asc')
+                                        &#9650; <!-- Upward arrow for ascending sort -->
+                                    @else
+                                        &#9660; <!-- Downward arrow for descending sort -->
+                                    @endif
+                                @endif
+                            </a>
+                        </th>
                         <th class="px-6 py-3 text-xs font-medium uppercase tracking-wider">Edit</th>
                         @if(auth()->check() && auth()->user()->role == 'admin')
                             <th class="px-6 py-3 text-xs font-medium uppercase tracking-wider">Remove</th>
