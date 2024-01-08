@@ -5,6 +5,28 @@
         <div class="self-end border-2 p-1 border-slate-50 text-sm rounded-lg">
             <a href="{{ route('tasks.create') }}">Add Task</a>
         </div>
+        <!-- Filter Panel -->
+        <div class="mb-4">
+            <form action="{{ route('tasks.index') }}" method="GET" class="flex gap-2">
+                <!-- Priority Filter -->
+                <select name="priority" class="rounded-md">
+                    <option value="">All Priorities</option>
+                    <option value="low" {{ $filters['priority'] == 'low' ? 'selected' : '' }}>Low</option>
+                    <option value="normal" {{ $filters['priority'] == 'normal' ? 'selected' : '' }}>Normal</option>
+                    <option value="high" {{ $filters['priority'] == 'high' ? 'selected' : '' }}>High</option>
+                </select>
+                <select name="status" class="rounded-md">
+                    <option value="">All Statuses</option>
+                    <option value="pending" {{ $filters['status'] == 'pending' ? 'selected' : '' }}>Pending</option>
+                    <option value="complete" {{ $filters['status'] == 'complete' ? 'selected' : '' }}>Complete</option>
+                </select>
+
+                <input type="text" name="title" placeholder="Search by title" class="rounded-md" value="{{ $filters['title'] }}" />
+
+                <!-- Submit Button -->
+                <button type="submit" class="bg-blue-500 text-white rounded-md px-4">Filter</button>
+            </form>
+        </div>
         <div class="flex justify-center">
             <table class="table-spacing min-w-full divide-y divide-gray-600 rounded-lg overflow-hidden text-center">
                 <thead class="bg-gray-600 text-slate-200">

@@ -13,25 +13,49 @@ class TaskController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
         // Define the number of items per page
         $perPage = 10;
 
+        // Start the query builder
+        $query = Task::query();
+
         // Check the total number of tasks
         $totalTasks = Task::count();
 
-        if ($totalTasks > $perPage && auth()->user()->role === 'admin') {
-            $tasks = Task::paginate($perPage);
-        } else if ($totalTasks <= $perPage && auth()->user()->role === 'admin') {
-            $tasks = Task::all();
-        } else if ($totalTasks > $perPage && auth()->user()->role !== 'admin') {
-            $tasks = Task::where('user_id', auth()->id())->paginate(10);
-        } else if ($totalTasks <= $perPage && auth()->user()->role !== 'admin') {
-            $tasks = Task::where('user_id', auth()->id())->get();
+        if ($request->filled('priority')) {
+            $query->where('priority', $request->priority);
         }
 
-        return view('tasks.index', compact('tasks'));
+        if ($request->filled('status')) {
+            $status = $request->status === 'complete' ? 1 : 0;
+            $query->where('completed', $status);
+        }
+
+        if ($request->filled('title')) {
+            $query->where('name', 'like', '%' . $request->title . '%');
+        }
+
+        if ($totalTasks > $perPage && auth()->user()->role === 'admin') {
+            $tasks = $query->paginate($perPage);
+        } else if ($totalTasks <= $perPage && auth()->user()->role === 'admin') {
+            $tasks = $query->get();
+        } else if ($totalTasks > $perPage && auth()->user()->role !== 'admin') {
+            $tasks = $query->where('user_id', auth()->id())->paginate($perPage);
+        } else if ($totalTasks <= $perPage && auth()->user()->role !== 'admin') {
+            $tasks = $query->where('user_id', auth()->id())->get();
+        }
+
+        return view('tasks.index', [
+            'tasks' =>
+            $tasks->appends($request->except('page')), // Appends all current request parameters except 'page'
+            'filters' => [
+                'priority' => $request->priority,
+                'status' => $request->status,
+                'title' => $request->title,
+            ],
+        ]);
     }
 
     /**
