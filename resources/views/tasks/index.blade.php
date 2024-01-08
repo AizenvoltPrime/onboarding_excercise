@@ -1,12 +1,24 @@
 <x-layout>
+    <nav class="bg-gray-800 p-4 text-slate-300 rounded-lg mt-2">
+        <div class="container mx-auto flex items-center justify-between gap-2 text-lg font-semibold">
+            <div>
+                <a href="{{ route('dashboard') }}" class="hover:text-gray-300">Dashboard</a>
+            </div>
+            <div>
+                @auth
+                    <a href="#" onclick="event.preventDefault(); document.getElementById('logout-form').submit();" class="hover:text-gray-300">Logout</a>
+                    <form id="logout-form" action="{{ route('logout') }}" method="POST" class="hidden">
+                        @csrf
+                    </form>
+                @endauth
+            </div>
+        </div>
+    </nav>
     @vite('resources/js/app.js')
     <div class="mt-32 flex flex-col justify-center items-center max-w-4xl gap-1">
-        <h1 class="text-center bg-slate-800 p-2 rounded-full text-3xl mb-2">Todo List</h1>
-        <div class="self-end border-2 p-1 border-slate-50 text-sm rounded-lg">
-            <a href="{{ route('tasks.create') }}">Add Task</a>
-        </div>
+        <h1 class="text-center bg-slate-800 p-2 rounded-full text-3xl mb-6">Todo List</h1>
         <!-- Filter Panel -->
-        <div class="mb-4">
+        <div>
             <form action="{{ route('tasks.index') }}" method="GET" class="flex gap-2">
                 <!-- Priority Filter -->
                 <select name="priority" class="rounded-lg bg-slate-300 text-slate-500">
@@ -26,6 +38,9 @@
                 <!-- Submit Button -->
                 <button type="submit" class="bg-blue-500 text-white rounded-md px-4">Filter</button>
             </form>
+        </div>
+        <div class="self-end border-2 p-1 border-slate-50 text-sm rounded-lg">
+            <a href="{{ route('tasks.create') }}">Add Task</a>
         </div>
         <div class="flex justify-center">
             <table class="table-spacing min-w-full divide-y divide-gray-600 rounded-lg overflow-hidden text-center">
