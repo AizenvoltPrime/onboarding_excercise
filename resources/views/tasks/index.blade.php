@@ -9,19 +9,19 @@
         <div class="mb-4">
             <form action="{{ route('tasks.index') }}" method="GET" class="flex gap-2">
                 <!-- Priority Filter -->
-                <select name="priority" class="rounded-md">
+                <select name="priority" class="rounded-lg bg-slate-300 text-slate-500">
                     <option value="">All Priorities</option>
                     <option value="low" {{ $filters['priority'] == 'low' ? 'selected' : '' }}>Low</option>
                     <option value="normal" {{ $filters['priority'] == 'normal' ? 'selected' : '' }}>Normal</option>
                     <option value="high" {{ $filters['priority'] == 'high' ? 'selected' : '' }}>High</option>
                 </select>
-                <select name="status" class="rounded-md">
+                <select name="status" class="rounded-lg bg-slate-300 text-slate-500">
                     <option value="">All Statuses</option>
                     <option value="pending" {{ $filters['status'] == 'pending' ? 'selected' : '' }}>Pending</option>
                     <option value="complete" {{ $filters['status'] == 'complete' ? 'selected' : '' }}>Complete</option>
                 </select>
 
-                <input type="text" name="title" placeholder="Search by title" class="rounded-md" value="{{ $filters['title'] }}" />
+                <input type="text" name="title" placeholder="Search by title" class="rounded-lg bg-slate-300 text-slate-500" value="{{ $filters['title'] }}" />
 
                 <!-- Submit Button -->
                 <button type="submit" class="bg-blue-500 text-white rounded-md px-4">Filter</button>
