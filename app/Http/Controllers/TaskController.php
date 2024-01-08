@@ -113,7 +113,7 @@ class TaskController extends Controller
         return back();
     }
 
-    public function destroy(Task $task)
+    public function destroy(Task $task, Request $request)
     {
         // Check if the user is not an admin or not logged in, abort the action
         if (!auth()->check() || auth()->user()->role != 'admin') {
@@ -122,7 +122,10 @@ class TaskController extends Controller
 
         $task->delete();
 
-        return redirect()->route('tasks.index')->with('success', 'Task deleted successfully.');
+        // Retrieve the current filter parameters from the request
+        $filters = $request->only(['priority', 'status', 'title', 'sort', 'direction', 'page']);
+
+        return redirect()->route('tasks.index', $filters)->with('success', 'Task deleted successfully.');
     }
 
     /**

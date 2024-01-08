@@ -4,7 +4,7 @@
         <form method="POST" action="{{ route('register') }}" class="flex flex-col text-slate-200 items-center justify-center gap-2 mt-1">
             @csrf
             <div class="flex flex-col justify-center items-center gap-1">
-                <label for="name">Name</label>
+                <label for="name">Username</label>
                 <input class="rounded-lg bg-slate-700 text-slate-300 text-center outline-slate-500" type="text" name="name" required>
             </div>
             <div class="flex flex-col justify-center items-center gap-1">

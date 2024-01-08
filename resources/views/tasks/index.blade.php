@@ -97,6 +97,22 @@
                                             <form data-dir="delete-task" action="{{ route('tasks.destroy', $task) }}" method="POST" onsubmit="return confirmDelete(event)">
                                                 @csrf
                                                 @method('DELETE')
+                                                <!-- Include current filter parameters as hidden fields -->
+                                                @if(isset($filters['priority']))
+                                                    <input type="hidden" name="priority" value="{{ $filters['priority'] }}">
+                                                @endif
+                                                @if(isset($filters['status']))
+                                                    <input type="hidden" name="status" value="{{ $filters['status'] }}">
+                                                @endif
+                                                @if(isset($filters['title']))
+                                                    <input type="hidden" name="title" value="{{ $filters['title'] }}">
+                                                @endif
+                                                @if(isset($filters['sort']))
+                                                    <input type="hidden" name="sort" value="{{ $filters['sort'] }}">
+                                                @endif
+                                                @if(isset($filters['direction']))
+                                                    <input type="hidden" name="direction" value="{{ $filters['direction'] }}">
+                                                @endif
                                                 <button type="submit"><span class="material-symbols-outlined">delete</span></button>
                                             </form>
                                         </td>
