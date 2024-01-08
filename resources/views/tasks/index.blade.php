@@ -157,6 +157,8 @@
                                                 @if(isset($filters['direction']))
                                                     <input type="hidden" name="direction" value="{{ $filters['direction'] }}">
                                                 @endif
+                                                <!-- Include the current page -->
+                                                <input type="hidden" name="page" value="{{ $tasks->currentPage() }}">
                                                 <button type="submit"><span class="material-symbols-outlined">delete</span></button>
                                             </form>
                                         </td>
