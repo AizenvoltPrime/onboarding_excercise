@@ -18,6 +18,12 @@ class TaskController extends Controller
         // Define the number of items per page
         $perPage = 10;
 
+        $sortField = $request->input(
+            'sort',
+            'id'
+        ); // Default sort by 'id'
+        $sortDirection = $request->input('direction', 'asc'); // Default sort direction
+
         // Start the query builder
         $query = Task::query();
 
@@ -37,6 +43,8 @@ class TaskController extends Controller
             $query->where('name', 'like', '%' . $request->title . '%');
         }
 
+        $query->orderBy($sortField, $sortDirection);
+
         if ($totalTasks > $perPage && auth()->user()->role === 'admin') {
             $tasks = $query->paginate($perPage);
         } else if ($totalTasks <= $perPage && auth()->user()->role === 'admin') {
@@ -48,13 +56,14 @@ class TaskController extends Controller
         }
 
         return view('tasks.index', [
-            'tasks' =>
-            $tasks->appends($request->except('page')), // Appends all current request parameters except 'page'
+            'tasks' => $tasks->appends($request->except('page'))->appends(['sort' => $sortField, 'direction' => $sortDirection]), // Appends all current request parameters except 'page'
             'filters' => [
                 'priority' => $request->priority,
                 'status' => $request->status,
                 'title' => $request->title,
             ],
+            'sortField' => $sortField, // Add this line
+            'sortDirection' => $sortDirection, // Add this line
         ]);
     }
 

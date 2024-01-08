@@ -31,8 +31,8 @@
             <table class="table-spacing min-w-full divide-y divide-gray-600 rounded-lg overflow-hidden text-center">
                 <thead class="bg-gray-600 text-slate-200">
                     <tr>
-                        <th class="px-6 py-3 text-xs font-medium uppercase tracking-wider">ID</th>
-                        <th class="px-6 py-3 text-xs font-medium uppercase tracking-wider">Task Name</th>
+                        <th class="px-6 py-3 text-xs font-medium uppercase tracking-wider"><a href="{{ route('tasks.index', array_merge($filters, ['sort' => 'id', 'direction' => $sortDirection == 'asc' ? 'desc' : 'asc'])) }}">ID</a></th>
+                        <th class="px-6 py-3 text-xs font-medium uppercase tracking-wider"><a href="{{ route('tasks.index', array_merge($filters, ['sort' => 'name', 'direction' => $sortDirection == 'asc' ? 'desc' : 'asc'])) }}">Task Name</a></th>
                         <th class="px-6 py-3 text-xs font-medium uppercase tracking-wider">Status</th>
                         <th class="px-6 py-3 text-xs font-medium uppercase tracking-wider">Completed</th>
                         <th class="px-6 py-3 text-xs font-medium uppercase tracking-wider">Edit</th>
@@ -93,7 +93,7 @@
         </div>
         @if ($tasks->total() > 10)
             <div class="mt-2 mb-2">
-                {{ $tasks->links() }}
+                {{ $tasks->appends(array_merge($filters, ['sort' => $sortField, 'direction' => $sortDirection]))->links() }}
             </div>
         @endif
 </x-layout>
