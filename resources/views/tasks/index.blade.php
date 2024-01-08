@@ -1,6 +1,6 @@
 <x-layout>
     <nav class="bg-gray-800 p-4 text-slate-300 rounded-lg mt-2">
-        <div class="container mx-auto flex items-center justify-between gap-2 text-lg font-semibold">
+        <div class="container mx-auto flex items-center justify-between gap-4 text-lg font-semibold">
             <div>
                 <a href="{{ route('dashboard') }}" class="hover:text-gray-300">Dashboard</a>
             </div>
@@ -36,7 +36,7 @@
                 <input type="text" name="title" placeholder="Search by title" class="rounded-lg bg-slate-300 text-slate-500" value="{{ $filters['title'] }}" />
 
                 <!-- Submit Button -->
-                <button type="submit" class="bg-blue-500 text-white rounded-md px-4">Filter</button>
+                <button type="submit" class="bg-cyan-600 text-white rounded-md px-4">Filter</button>
             </form>
         </div>
         <div class="self-end border-2 p-1 border-slate-50 text-sm rounded-lg">

@@ -1,6 +1,6 @@
 <x-layout>
     <nav class="bg-gray-800 p-4 text-slate-300 rounded-lg mt-2">
-        <div class="container mx-auto flex items-center justify-between gap-2 text-lg font-semibold">
+        <div class="container mx-auto flex items-center justify-between gap-4 text-lg font-semibold">
             <div>
                 <a href="{{ route('dashboard') }}" class="hover:text-gray-300">Dashboard</a>
             </div>
